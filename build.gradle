@@ -5,15 +5,19 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:0.12.+'
-        classpath 'com.android.support:support-v13:18.0.+'
     }
 }
 
 apply plugin: 'android-library'
 
 android {
+    compileSdkVersion 19
+    buildToolsVersion "19.1"
     defaultConfig {
-        targetSdkVersion '19'
-        minSdkVersion '14'
+        targetSdkVersion 19
+        minSdkVersion 14
     }
+}
+dependencies {
+    compile 'com.android.support:support-v13:+'
 }

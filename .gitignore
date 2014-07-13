@@ -1,4 +1,2 @@
-/code/gen
-/code/bin
-/code/libs
+/build
 .DS_Store

@@ -1,0 +1,19 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.12.+'
+        classpath 'com.android.support:support-v13:18.0.+'
+    }
+}
+
+apply plugin: 'android-library'
+
+android {
+    defaultConfig {
+        targetSdkVersion '19'
+        minSdkVersion '14'
+    }
+}

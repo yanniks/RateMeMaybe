@@ -3,10 +3,10 @@ package com.kopfgeldjaeger.ratememaybe;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
+import android.support.v4.app.FragmentActivity;
 import com.kopfgeldjaeger.ratememaybe.RateMeMaybe.OnRMMUserChoiceListener;
 
-public class SampleActivity extends SherlockFragmentActivity implements OnRMMUserChoiceListener {
+public class SampleActivity extends FragmentActivity implements OnRMMUserChoiceListener {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

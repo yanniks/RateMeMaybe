@@ -1,6 +1,9 @@
 package com.kopfgeldjaeger.ratememaybe;
 
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.Toast;
 
 import android.support.v4.app.FragmentActivity;
@@ -12,19 +15,28 @@ public class SampleActivity extends FragmentActivity implements OnRMMUserChoiceL
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_sample);
-		
-		RateMeMaybe.resetData(this);
-		RateMeMaybe rmm = new RateMeMaybe(this);
-		rmm.setPromptMinimums(0, 0, 0, 0);
-		rmm.setRunWithoutPlayStore(true);
-		rmm.setAdditionalListener(this);
-		rmm.setDialogMessage("You really seem to like this app, "
-				+"since you have already used it %totalLaunchCount% times! "
-				+"It would be great if you took a moment to rate it.");
-		rmm.setDialogTitle("Rate this app");
-		rmm.setPositiveBtn("Yeeha!");
-		rmm.run();
-		
+
+	    Button button1 = (Button) findViewById(R.id.androidpit);
+	    button1.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				rate("androidpit");
+			}
+		});
+	    Button button2 = (Button) findViewById(R.id.amazon);
+	    button2.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				rate("amazon");
+			}
+		});
+	    Button button3 = (Button) findViewById(R.id.playstore);
+	    button3.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				rate("play");
+			}
+		});
 	}
 
 	@Override
@@ -40,7 +52,16 @@ public class SampleActivity extends FragmentActivity implements OnRMMUserChoiceL
 	@Override
 	public void handleNegative() {
 		Toast.makeText(this, "Negative", Toast.LENGTH_SHORT).show();
-
+	}
+	
+	public void rate (String store) {
+		RateMeMaybe.resetData(this);
+		RateMeMaybe rmm = new RateMeMaybe(this);
+		rmm.setPromptMinimums(0, 0, 0, 0);
+		rmm.setStore(store);
+		rmm.setRunWithoutPlayStore(true);
+		rmm.setAdditionalListener(this);
+		rmm.run();
 	}
 
 }

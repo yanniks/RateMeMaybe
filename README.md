@@ -2,17 +2,16 @@ RateMeMaybe
 ===========
 - Asks the user if (s)he wants to open the Play Store to rate your application when certain requirements are met (see below). This can and should be configured to be very cautious. **Don't annoy your users!**
 - Dialog icon, title, message and so on can be **easily customized**
-- The sample Activity uses SherlockFragmentActivity (from [ActionBarSherlock]), but you can use a normal FragmentActivity if you do not use ABS. If you also do not use the android support library, you can change ```mActivity.getSupportFragmentManager()``` to ```mActivity.getFragmentManager()```
 - Code is heavily based on [AppRate] by Timothee Jeannin
+- Supports rating in AndroidPit App Center (```setStore("androidpit")```), Google Play (```setStore("play")```) and Amazon App-Shop (```setStore("amazon")```)
 - License: MIT
-[ActionBarSherlock]: http://actionbarsherlock.com
 [AppRate]: https://github.com/TimotheeJeannin/AppRate
 
 To use it, you can simply copy [RateMeMaybe.java] and [RateMeMaybeFragment.java] into your project.
-[RateMeMaybe.java]: https://github.com/Kopfgeldjaeger/RateMeMaybe/blob/master/code/src/com/kopfgeldjaeger/ratememaybe/RateMeMaybe.java
-[RateMeMaybeFragment.java]: https://github.com/Kopfgeldjaeger/RateMeMaybe/blob/master/code/src/com/kopfgeldjaeger/ratememaybe/RateMeMaybeFragment.java
+[RateMeMaybe.java]: https://github.com/yanniks/RateMeMaybe/blob/master/code/src/com/kopfgeldjaeger/ratememaybe/RateMeMaybe.java
+[RateMeMaybeFragment.java]: https://github.com/yanniks/RateMeMaybe/blob/master/code/src/com/kopfgeldjaeger/ratememaybe/RateMeMaybeFragment.java
 
-Example usage in your (Sherlock)FragmentActivity:
+Example usage in your FragmentActivity:
 ```java
 RateMeMaybe rmm = new RateMeMaybe(this);
 rmm.setPromptMinimums(10, 14, 10, 30);
@@ -21,6 +20,7 @@ rmm.run();
 // More customized example
 RateMeMaybe rmm = new RateMeMaybe(this);
 rmm.setPromptMinimums(10, 14, 10, 30);
+rmm.setStore("play");
 rmm.setDialogMessage("You really seem to like this app, "
 				+"since you have already used it %totalLaunchCount% times! "
 				+"It would be great if you took a moment to rate it.");

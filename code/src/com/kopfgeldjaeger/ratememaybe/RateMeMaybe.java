@@ -7,6 +7,7 @@ import android.content.SharedPreferences.Editor;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
 import android.text.format.DateUtils;
@@ -26,6 +27,10 @@ public class RateMeMaybe implements RMMFragInterface {
 	private String mPositiveBtn;
 	private String mNeutralBtn;
 	private String mNegativeBtn;
+	private String mStore;
+	private String storename;
+	public String storeuri;
+	public String storeid;
 	private int mIcon;
 
 	private int mMinLaunchesUntilInitialPrompt = 0;
@@ -64,7 +69,7 @@ public class RateMeMaybe implements RMMFragInterface {
 
 	public String getDialogTitle() {
 		if (mDialogTitle == null) {
-			return "Rate " + getApplicationName();
+			return mActivity.getResources().getString(R.string.rate2) + " " + getApplicationName();
 		} else {
 			return mDialogTitle;
 		}
@@ -80,13 +85,27 @@ public class RateMeMaybe implements RMMFragInterface {
 	public void setDialogMessage(String dialogMessage) {
 		mDialogMessage = dialogMessage;
 	}
+	
+	public void setStore(String store) {
+		mStore = store;
+	}
 
 	public String getDialogMessage() {
+		if (mStore == null || mStore.equals("play")) {
+			storename = "Google Play";
+			storeuri = "market://details?id=" + mActivity.getPackageName();
+			storeid = "com.android.vending";
+		} else if (mStore.equals("amazon")) {
+			storename = "Amazon App-Shop";
+			storeuri = "amzn://apps/android?p=" + mActivity.getPackageName();
+			storeid = "com.amazon.venezia";
+		} else if (mStore.equals("androidpit")) {
+			storename = "AndroidPIT App Center";
+			storeuri = "appcenter://package/" + mActivity.getPackageName();
+			storeid = "de.androidpit.appcenter";
+		}
 		if (mDialogMessage == null) {
-			return "If you like using "
-					+ this.getApplicationName()
-					+ ", it would be great"
-					+ " if you took a moment to rate it in the Play Store. Thank you!";
+			return mActivity.getResources().getString(R.string.ifyoulike,this.getApplicationName(),storename);
 		} else {
 			return mDialogMessage.replace("%totalLaunchCount%", String
 					.valueOf(mPreferences.getInt(PREF.TOTAL_LAUNCH_COUNT, 0)));
@@ -95,7 +114,7 @@ public class RateMeMaybe implements RMMFragInterface {
 
 	public String getPositiveBtn() {
 		if (mPositiveBtn == null) {
-			return "Rate it";
+			return mActivity.getResources().getString(R.string.rate);
 		} else {
 			return mPositiveBtn;
 		}
@@ -112,7 +131,7 @@ public class RateMeMaybe implements RMMFragInterface {
 
 	public String getNeutralBtn() {
 		if (mNeutralBtn == null) {
-			return "Not now";
+			return mActivity.getResources().getString(R.string.notnow);
 		} else {
 			return mNeutralBtn;
 		}
@@ -129,7 +148,7 @@ public class RateMeMaybe implements RMMFragInterface {
 
 	public String getNegativeBtn() {
 		if (mNegativeBtn == null) {
-			return "Never";
+			return mActivity.getResources().getString(R.string.never);
 		} else {
 			return mNegativeBtn;
 		}
@@ -252,7 +271,7 @@ public class RateMeMaybe implements RMMFragInterface {
 		}
 
 		if (!isPlayStoreInstalled()) {
-			Log.d(TAG, "No Play Store installed on device.");
+			Log.d(TAG, "No " + storename + " installed on device.");
 			if (!mRunWithoutPlayStore) {
 				return;
 			}
@@ -331,10 +350,9 @@ public class RateMeMaybe implements RMMFragInterface {
 		try {
 			mActivity
 					.startActivity(new Intent(Intent.ACTION_VIEW, Uri
-							.parse("market://details?id="
-									+ mActivity.getPackageName())));
+							.parse(storeuri)));
 		} catch (ActivityNotFoundException e) {
-			Toast.makeText(mActivity, "Could not launch Play Store!",
+			Toast.makeText(mActivity, "Could not launch " + storename,
 					Toast.LENGTH_SHORT).show();
 		}
 

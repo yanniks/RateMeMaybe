@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-	<string name="ifyoulike">Wenn dir %1$s gefällt, dann bewerte die App doch bitte in %2$s. Danke!</string>
+	<string name="ifyoulike">Wenn dir %1$s gefällt, dann bewerte die App doch bitte im %2$s. Danke!</string>
 	<string name="rate">Bewerten</string>
 	<string name="notnow">Nicht jetzt</string>
 	<string name="never">Niemals</string>

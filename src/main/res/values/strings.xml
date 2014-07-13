@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">RateMeMaybe</string>
-	<string name="ifyoulike">If you like using %1$s, it would be great if you take a moment to rate it in %2$s. Thank you!</string>
+	<string name="ifyoulike">If you like using %1$s, it would be great if you take a moment to rate it inside the %2$s. Thank you!</string>
 	<string name="rate">Rate it</string>
 	<string name="notnow">Not now</string>
 	<string name="never">Never</string>

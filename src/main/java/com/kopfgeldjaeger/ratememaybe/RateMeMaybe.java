@@ -92,7 +92,7 @@ public class RateMeMaybe implements RMMFragInterface {
 
 	public String getDialogMessage() {
 		if (mStore == null || mStore.equals("play")) {
-			storename = "Google Play";
+			storename = "Play Store";
 			storeuri = "market://details?id=" + mActivity.getPackageName();
 			storeid = "com.android.vending";
 		} else if (mStore.equals("amazon")) {
